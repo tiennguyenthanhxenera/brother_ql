@@ -46,11 +46,8 @@ def list_available_devices():
     printers = usb.core.find(find_all=1,  idVendor=0x04f9)
 
     def identifier(dev):
-        try:
-            serial = usb.util.get_string(dev, 256, dev.iSerialNumber)
-            return 'usb://0x{:04x}:0x{:04x}_{}'.format(dev.idVendor, dev.idProduct, serial)
-        except:
-            return 'usb://0x{:04x}:0x{:04x}'.format(dev.idVendor, dev.idProduct)
+        return 'usb://0x{:04x}:0x{:04x}'.format(dev.idVendor, dev.idProduct)
+        
 
     return [{'identifier': identifier(printer), 'instance': printer} for printer in printers]
 
